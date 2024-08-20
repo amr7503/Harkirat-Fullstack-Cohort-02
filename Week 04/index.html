@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUM CALCULATION</title>
+</head>
+<script>
+    let timeout;
+    function debounceAdd(){
+        //delay the call to add() until I have not been called for 100ms
+        //and I have been called atleast once
+        clearTimeout(timeout); 
+        timeout=setTimeout(add,1000);
+
+        //only setTimeout() is a good starting solution but there is a problem
+        //If the user types again the current setTimeout clock should be cancelled
+        //To implement debouncing we need to keep track of the setTimeout clock
+        //and cancel it if the user types again using clearTimeout()
+       
+         //If debounceAdd() is called again within 100ms then It will be called again
+        //If it is not called in 100ms then add() will be called after 100ms
+
+    }
+
+    async function add(){
+        let a=document.getElementById("first").value;
+        let b=document.getElementById("second").value;
+        //let c=parseInt(a)+parseInt(b);
+        //display the result in a sentence
+        const element=document.getElementById("finalSum");
+        //element.innerHTML="The sum of       "+a+" and "+b+" is "+c;
+
+        const response=await fetch("https://sum-server.100xdevs.com/sum?a="+a+"&b="+b)
+
+        const c=await response.text();       
+        element.innerHTML="The sum of "+a+" and "+b+" is "+c;
+    }
+</script>
+<body>
+    <input id="first" type="text" placeholder="first number" oninput="debounceAdd()"><br><br>
+    
+    <input id="second" type="text" placeholder="second number" oninput="debounceAdd()"><br><br>
+
+    <!-- <button onclick="add()">Add</button> -->
+
+    <p id="finalSum"></p>
+  
+</body>
+</html>
+
+<!-- <html>
+    <style>
+        .container{
+            background-color: red;
+            font-size: 100;
+            padding: 20;
+            margin: 100;
+            color: green;
+        }
+    </style>
+    <body>
+        <div class="container">
+            Hii there
+        </div>
+        <div class="container">
+            Hello there
+        </div>
+    </body>
+</html> -->

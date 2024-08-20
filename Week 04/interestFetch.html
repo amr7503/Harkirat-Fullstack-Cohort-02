@@ -1,0 +1,26 @@
+<HTML>
+    <head>
+        <title>Interest Calculator</title>
+    </head>
+    <script>
+        async function populateDiv()
+        {
+            const p=document.getElementById("principal").value;
+            const r=document.getElementById("rate").value;
+            const t=document.getElementById("time").value;
+
+            const response=await fetch("https://sum-server.100xdevs.com/interest?principal="+p+"&rate="+r+"&time="+t+"");
+            const ans=await response.json();
+
+            document.getElementById("showResult").innerHTML="Total = "+ans.total+"\nInterest = "+ans.interest;
+
+        }
+    </script>
+    <body>
+        <input type="text" id="principal" placeholder="Principal"><br><br>
+        <input type="text" id="rate" placeholder="Rate"><br><br>
+        <input type="text" id="time" placeholder="Time"><br><br>
+        <button onclick="populateDiv()">Calculate</button><br><br>
+        <div id="showResult"></div>
+    </body>
+</HTML>

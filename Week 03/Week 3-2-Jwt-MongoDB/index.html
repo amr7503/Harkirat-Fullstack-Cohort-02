@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* function getAnimalData() {
+            const response=fetch("https://fakerapi.it/api/v1/persons").then(function(response){
+                response.json().then(function(data){
+                    console.log(data)
+                
+                })})
+        } */
+
+
+            //.then(response => response.json()).then(data => console.log(data)).catch(error => console.error(error))
+        
+
+            // fetch('http://localhost:3000/animals')
+            //     .then(response => response.json())
+            //     .then(data => console.log(data))
+            //     .catch(error => console.error(error))
+
+
+            // --------------- Best method is doing async await method  for <<<<< FETCH API >>>> because it is more readable and easy to understand ----------------
+            //https://gist.github.com/hkirat/ea4d132f70f69d1d47baac9eb3cc1313
+            //https://fakerapi.it/api/v1/persons
+        
+        async function getAnimalData() {
+            const response= await fetch("https://fakerapi.it/api/v1/persons")
+            const finalData= await response.json();
+            //console.log(finalData)
+            document.getElementById("userData").innerHTML = JSON.stringify(finalData);
+
+        }
+
+    </script>
+    <button onclick="getAnimalData()">Get Animal Data</button>
+    <div id="userData"></div>
+</body>
+</html> 
