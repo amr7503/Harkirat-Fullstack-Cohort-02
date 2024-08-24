@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    let globalID=1;
+    function markAsDone(todoId){
+        const child=document.getElementById(todoId);
+        child.children[2].innerHTML="Done!";
+    }
+    function createChild(title,description,id){
+       // const title=document.getElementById("title").value;
+        //const description=document.getElementById("description").value;
+        //console.log(title+" "+description)
+        
+        //Good way to do it - document.createElement , appendChild 
+
+        const  childDiv=document.createElement("div");
+        //childDiv.innerHTML= title;
+        const grandChildDiv1=document.createElement("div");
+        grandChildDiv1.innerHTML=title;
+        const grandChildDiv2=document.createElement("div");
+        grandChildDiv2.innerHTML=description;
+        const grandChildDiv3=document.createElement("button");
+        grandChildDiv3.innerHTML="Mark as done";
+        grandChildDiv3.setAttribute("onclick",`markAsDone(${id})`);
+
+        //  <div>
+        //     <div>title</div>
+        //     <div>description</div>
+        //     <button>Mark as done</button>
+        //  </div>
+
+        childDiv.appendChild(grandChildDiv1);
+        childDiv.appendChild(grandChildDiv2);
+        childDiv.appendChild(grandChildDiv3);
+        childDiv.setAttribute("id",id);
+
+        document.getElementById("container").appendChild(childDiv);
+
+       //Bad way to do it
+        // const originalHtml=document.getElementById("container")
+        // .innerHTML;
+        // document.getElementById("container")
+        // .innerHTML=originalHtml+`<div>
+        //     <div>${title}</div>
+        //     <div>${description}</div>
+        //     <button>Mark as done</button>
+        //     </div>`
+    }
+
+    function addTodo(){
+        const title=document.getElementById("title").value;
+        const description=document.getElementById("description").value;
+        createChild(title,description,globalID++);
+    }
+</script>
+<body>
+    <div>
+        <input id="title" type="text" placeholder="title"><br><br>
+        <input id="description" type="text" placeholder="description"><br><br>
+        <button onclick="addTodo()">Add ToDo</button>
+    </div>
+    <p id="container"></p>
+</body>
+</html>
+
+
+<!-- This is sligltly different we are appending elements -->
+<!-- 
+
+document.createElement();
+document.appendChild();; 
+element.setAttribute("<name>",`value`);
+element.children[] 
+
+-->

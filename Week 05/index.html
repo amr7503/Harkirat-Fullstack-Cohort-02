@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="buttonParent"></div>
+
+    <script>
+        let state={
+            count:0
+        }
+
+        function onButtonPress(){
+            state.count++;
+            ComponentReRender();
+        }
+
+        function ComponentReRender(){
+            document.getElementById("buttonParent").innerHTML = "";
+            const component = CreateButtonComponent(state.count);
+            document.getElementById("buttonParent").appendChild(component);
+        }
+
+        function CreateButtonComponent(count){
+            const button = document.createElement("button");
+            button.innerHTML = `Count: ${count}`;0
+            button.setAttribute("onclick", "onButtonPress()"); 
+            //button.onclick = onButtonPress; // Assign event handler directly
+            return button;
+        }
+
+        ComponentReRender();
+    </script>
+</body>
+</html>
