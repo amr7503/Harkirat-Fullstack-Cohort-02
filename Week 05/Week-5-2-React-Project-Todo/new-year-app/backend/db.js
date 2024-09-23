@@ -8,7 +8,9 @@
 
 const mongoose = require('mongoose');
 //const { title } = require('process');
-mongoose.connect('mongodb+srv://amaresh7503:1wqgqbxjzn@cluster0.vkuorvr.mongodb.net/todos');
+require('dotenv').config();
+const api = process.env.MONGO_API;
+mongoose.connect(api);
 
 
 //describing user schema
