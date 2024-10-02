@@ -1,35 +1,19 @@
-import React from 'react';
-import { useState } from 'react'
-import './App.css'
+import { useEffect } from "react";
 
-function App() {
-  const [title, setTitle] = useState("My name is Amaresh Swain")
+function App(){
 
-  function updateTitle()
-     {
-      setTitle("My name is Amaresh "+Math.random());
-     }   
-    
-  return (
-     
-      <div>
-          <button onClick={updateTitle}>Update the title</button>
-          <Header title={title}></Header>
-          <Header title="Harkirat1"></Header>
-          <Header title="Harkirat2"></Header>
-          <Header title="Harkirat3"></Header>
-          <Header title="Harkirat4"></Header>
-      </div>
-  )
+ useEffect(function(){
+  alert("hii, Component is mounted")
+ },[]) ; //dependency array - The empty array [] passed as the second argument to useEffect ensures that the effect will only run once when the component mounts, and not on every re-render.
+
+ // If still it runs twice it is due to react strict mode nonetheless it will run only once in production mode
+
+ // mount - when the component is first rendered
+
+ return <div>
+   <h1>hii there</h1>
+  </div>
 
 }
-
-     const Header = React.memo(function Header({title}) {
-      return <div>
-       {title}
-      </div>
-     })
-
-
 
 export default App
