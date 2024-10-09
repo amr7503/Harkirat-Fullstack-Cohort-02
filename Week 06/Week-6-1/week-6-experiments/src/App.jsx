@@ -1,19 +1,58 @@
-import { useEffect } from "react";
+// import { Fragment, memo, useEffect, useState } from "react";
 
-function App(){
 
- useEffect(function(){
-  alert("hii, Component is mounted")
- },[]) ; //dependency array - The empty array [] passed as the second argument to useEffect ensures that the effect will only run once when the component mounts, and not on every re-render.
+// function App(){
+//   const [firstTitle, setFirstTitle] = useState("My name is Amaresh");
+//   let title= ["My name is Amaresh Swain","My name is Amaresh Tripathy","My name is Amaresh KrishnaDas"];
+//    function changeTitle(){
+//      setFirstTitle(title[Math.floor(Math.random()*3)]);
+//    } 
 
- // If still it runs twice it is due to react strict mode nonetheless it will run only once in production mode
+//    const Header= memo(function({title}){
+//     return <Fragment>
+//             {title}
+//            </Fragment>
+//   })
 
- // mount - when the component is first rendered
+//    return <div>
+//      <button onClick={changeTitle}>Change My Title</button> <br /><br />
+//      <Header title={firstTitle}/> <br /><br />
+//      <Header title="My name is Disha Tripathy"/> <br />
+//      <Header title="My name is Disha Tripathy"/> <br />
+//      <Header title="My name is Disha Tripathy"/>
+//      </div>
 
- return <div>
-   <h1>hii there</h1>
-  </div>
+//     // function Header({title}){
+//     //   return <Fragment>{title}</Fragment>
+//     // }
+    
+// }
 
+
+// export default App
+
+
+import React, { useState, memo, Fragment } from 'react';
+
+const Header = memo(function({ title }) {
+  return (
+    <Fragment>
+      {title}
+    </Fragment>
+  );
+});
+
+function App() {
+  const [counter, setCounter] = useState(0);
+
+  return (
+    <div>
+      <Header title="Welcome to My App" /><br />
+      <Header title="Another Header" /><br />
+      <button onClick={() => setCounter(counter + 1)}>Increase Counter</button>
+      <p>Counter: {counter}</p>
+    </div>
+  );
 }
 
-export default App
+export default App;
